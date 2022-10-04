@@ -40,10 +40,6 @@
                         #{lop.name}
                     </h:column>
                     <h:column>
-                        <f:facet name="header">Lop truong ID</f:facet>
-                        #{lop.lopTruongId}
-                    </h:column>
-                    <h:column>
                         <h:form>
                             <h:commandButton value="delete">
                                 <f:ajax event="click" render="quan-ly-danh-sach-lop" listener="#{lopController.deleteLop(lop)}"/>
@@ -51,23 +47,36 @@
                         </h:form>
                     </h:column>
                 </h:dataTable>
-                <h:form>
+                <h:form rendered="#{lopController.selectedLop == null}">
                     <h:commandButton value="Back to homepage" >
                         <f:ajax event="click" listener="#{mainController.changePage('Main')}" render="all" />
+                    </h:commandButton>
+                    <h:commandButton value="Them lop" >
+                        <f:ajax event="click" listener="#{lopController.createNewClass}" render="quan-ly-danh-sach-lop" />
                     </h:commandButton>
                 </h:form>
 <!--
                 Bang hien thi chi tiet cua lop
                                        -->
                 <h:panelGroup id="chi-tiet-lop" rendered="#{lopController.selectedLop != null}" >
-                    <h:panelGrid columns="2" >
-                        <h:outputLabel value="ID lop"/>
-                        <h:outputLabel value="#{lopController.selectedLop.id}" />
-                        <h:outputLabel value="Ten lop"/>
-                        <h:inputText value="#{lopController.selectedLop.name}" >
-                            <f:ajax event="change" listener="#{lopController.updateLop()}" render="chi-tiet-lop"/>
-                        </h:inputText>
-                    </h:panelGrid>
+                    <h:form>
+                        <h:panelGrid columns="2" >
+                            <h:outputLabel value="ID lop"/>
+                            <h:outputLabel value="#{lopController.selectedLop.id}" />
+                            <h:outputLabel value="Ten lop"/>
+                            <h:inputText value="#{lopController.selectedLop.name}" >
+                                <f:ajax event="change" listener="#{lopController.updateLop(lopController.selectedLop)}" render="chi-tiet-lop"/>
+                            </h:inputText>
+                            <h:outputLabel value="ID lop truong"/>
+                            <h:inputText value="#{lopController.selectedLop.lopTruongId}" id="lopTruongId">
+                                <f:ajax event="change" listener="#{lopController.updateLop(lopController.selectedLop)}" render="chi-tiet-lop"/>
+                                <f:validator validatorId="classValidator" />
+                                <f:attribute name="lop" value="#{lopController.selectedLop}"/>
+                            </h:inputText>
+                            <h:message for="lopTruongId" style="color: red"/>
+                        </h:panelGrid>
+                    </h:form>
+
 
                     <h:dataTable value="#{lopController.lopDetail.sinhVienList}" var="sv" >
                         <h:column>
@@ -96,6 +105,7 @@
                         <h:commandButton value="Back to class list" >
                             <f:ajax event="click" listener="#{mainController.changePage('Lop')}" render="all" />
                         </h:commandButton>
+                        <h:commandButton value="Them sinh vien" action="#{sinhVienController.createSinhVien(lopController.selectedLop)}" />
                     </h:form>
                 </h:panelGroup>
             </h:panelGroup>

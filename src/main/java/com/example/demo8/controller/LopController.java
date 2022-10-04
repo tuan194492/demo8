@@ -3,21 +3,17 @@ package com.example.demo8.controller;
 import com.example.demo8.dto.ClassDTO;
 import com.example.demo8.dto.PosgresqlLopDTO;
 import com.example.demo8.model.Lop;
-import com.example.demo8.model.SinhVien;
-import sun.applet.Main;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.annotation.ManagedProperty;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 @Named(value = "lopController")
-@SessionScoped
+@ConversationScoped
 public class LopController implements Serializable {
 
-    @ManagedProperty(value = "#{mainController}")
-    private MainController mainController;
     private ClassDTO classDTO;
     private List<Lop> lopList;
 
@@ -59,8 +55,14 @@ public class LopController implements Serializable {
         }
     }
 
-    public void updateLop() {
-        if (selectedLop != null)
-            classDTO.update(selectedLop);
+    public void updateLop(Lop lop) {
+        if (lop != null)
+            classDTO.update(lop);
+    }
+
+    public void createNewClass() {
+        Lop lop = new Lop();
+        lop.setName("Default name");
+        classDTO.addLop(lop);
     }
 }

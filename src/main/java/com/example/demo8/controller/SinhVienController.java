@@ -2,8 +2,10 @@ package com.example.demo8.controller;
 
 import com.example.demo8.dto.PostgresqlSinhVienDTO;
 import com.example.demo8.dto.SinhVienDTO;
+import com.example.demo8.model.Lop;
 import com.example.demo8.model.SinhVien;
 
+import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -11,8 +13,8 @@ import java.io.Serializable;
 import java.util.List;
 
 @Named(value = "sinhVienController")
-@SessionScoped
-public class SinhVienController implements Serializable {
+@ConversationScoped
+public class SinhVienController  implements Serializable {
     public SinhVienController() {
 
     }
@@ -71,6 +73,12 @@ public class SinhVienController implements Serializable {
     public String createSinhVien() {
         selectedSinhVien = new SinhVien();
         selectedSinhVien.setId(-1);
+        return "edit";
+    }
+    public String createSinhVien(Lop lop) {
+        selectedSinhVien = new SinhVien();
+        selectedSinhVien.setId(-1);
+        selectedSinhVien.setClassId(lop.getId());
         return "edit";
     }
 

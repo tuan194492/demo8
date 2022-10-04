@@ -27,13 +27,15 @@ public class PostgresqlSinhVienDTO implements SinhVienDTO {
     public void add(SinhVien sinhVien) {
         try {
             Connection connection = connect();
-            String query = "INSERT INTO sinhvien (\"name\", birth) VALUES(?, ?)";
+            String query = "INSERT INTO sinhvien (\"name\", birth, lop_id) VALUES(?, ?, ?)";
 
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, sinhVien.getName());
 
             Date sqlDate = new Date(sinhVien.getBirth().getTime());
             statement.setDate(2, sqlDate);
+
+            statement.setInt(3, sinhVien.getClassId());
 
             System.out.println("Current query is " + statement + " " + sinhVien.getBirth().toString());
             statement.execute();
@@ -60,6 +62,7 @@ public class PostgresqlSinhVienDTO implements SinhVienDTO {
                 sinhVien.setId(resultSet.getInt("user_id"));
                 sinhVien.setName(resultSet.getString("name"));
                 sinhVien.setBirth(resultSet.getDate("birth"));
+                sinhVien.setClassId(resultSet.getInt("lop_id"));
                 sinhVienList.add(sinhVien);
             }
 
@@ -81,14 +84,17 @@ public class PostgresqlSinhVienDTO implements SinhVienDTO {
                     "UPDATE sinhvien as sv " +
                             "SET " +
                             "\"name\" = ?, " +
-                            "birth = ? " +
+                            "birth = ? ," +
+                            "lop_id = ?" +
                             "WHERE sv.user_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setInt(3, sinhVien.getId());
+            statement.setInt(4, sinhVien.getId());
             statement.setString(1, sinhVien.getName());
 
             Date sqlDate = new Date(sinhVien.getBirth().getTime());
             statement.setDate(2, sqlDate);
+
+            statement.setInt(3, sinhVien.getClassId());
 
             System.out.println("Current query is " + statement);
             statement.execute();

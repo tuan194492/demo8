@@ -78,17 +78,18 @@ public class PosgresqlLopDTO implements ClassDTO{
 
     @Override
     public void addLop(Lop lop) {
+        try {
+            Connection connection = connect();
+            String query = "INSERT INTO lop (\"name\") " +
+                    "VALUES(?)";
 
-    }
-
-    @Override
-    public void setLopTruong(SinhVien sinhVien) {
-
-    }
-
-    @Override
-    public void themSinhVien(SinhVien sinhVien) {
-
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, lop.getName());
+            statement.execute();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -107,6 +108,7 @@ public class PosgresqlLopDTO implements ClassDTO{
                 sinhVien.setId(resultSet.getInt("user_id"));
                 sinhVien.setName(resultSet.getString("name"));
                 sinhVien.setBirth(resultSet.getDate("birth"));
+                sinhVien.setClassId(classID);
                 sinhVienList.add(sinhVien);
             }
             connection.close();

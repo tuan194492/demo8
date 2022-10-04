@@ -28,7 +28,12 @@
                     <f:validator validatorId="dateValidator" />
                     <f:converter converterId="myDateConverter"/>
                 </h:inputText>
-                <h:message for="birth" style="color: red" id="birthMsg"/>
+                <h:message for="birth" style="color: red" />
+                <h:outputLabel value="ID lop" />
+                <h:inputText value="#{sinhVienController.selectedSinhVien.classId}" id="classId">
+                    <f:ajax event="change" listener="#{sinhVienController.saveSinhVien(sinhVienController.selectedSinhVien)}"/>
+                </h:inputText>
+                <h:message for="classId" style="color: red" />
             </h:panelGrid>
             <h:commandButton value="Back to homepage" action="mainpage" />
         </h:form>

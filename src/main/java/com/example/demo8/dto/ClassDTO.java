@@ -12,8 +12,6 @@ public interface ClassDTO {
     void update(Lop lop);
     void deleteLop(Lop lop);
     void addLop(Lop lop);
-    void setLopTruong(SinhVien sinhVien);
-    void themSinhVien(SinhVien sinhVien);
     List<SinhVien> getSinhVienList(int classID);
 
 }

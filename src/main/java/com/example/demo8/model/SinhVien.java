@@ -7,6 +7,16 @@ public class SinhVien {
     private String name;
     private Date birth;
 
+    private int classId;
+
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
+
     public SinhVien() {
 
     }

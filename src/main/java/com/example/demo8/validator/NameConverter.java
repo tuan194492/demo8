@@ -21,6 +21,14 @@ public class NameConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object o) {
-        return o.toString();
+
+        String[] stringList = o.toString().split(" ");
+        StringBuilder result = new StringBuilder("");
+        for (int i = 0; i < stringList.length; i ++) {
+            stringList[i] = stringList[i].substring(0, 1).toUpperCase() + stringList[i].substring(1);
+            result.append(stringList[i]);
+            result.append(" ");
+        }
+        return result.toString();
     }
 }
