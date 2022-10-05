@@ -1,5 +1,7 @@
 package com.example.demo8.controller;
 
+import com.example.demo8.dto.ClassDTO;
+import com.example.demo8.dto.PosgresqlLopDTO;
 import com.example.demo8.dto.PostgresqlSinhVienDTO;
 import com.example.demo8.dto.SinhVienDTO;
 import com.example.demo8.model.Lop;
@@ -18,9 +20,9 @@ import java.util.List;
 @ConversationScoped
 public class SinhVienController  implements Serializable {
     public SinhVienController() {
-
+        sinhVienDTO = new PostgresqlSinhVienDTO();
     }
-    private final SinhVienDTO sinhVienDTO = new PostgresqlSinhVienDTO();
+    private SinhVienDTO sinhVienDTO;
     private List<SinhVien> sinhVienList;
     private SinhVien selectedSinhVien;
 
@@ -87,6 +89,13 @@ public class SinhVienController  implements Serializable {
     public void deleteSinhVien(SinhVien sinhVien) {
         System.out.println("Delete sinh vien");
         sinhVienDTO.deleteSinhVien(sinhVien);
+    }
+
+    public List<SinhVien> getSinhVienFromLop(Lop lop) {
+        ClassDTO classDTO = new PosgresqlLopDTO();
+        if (lop != null)
+            sinhVienList = classDTO.getSinhVienList(lop.getId());
+        return sinhVienList;
     }
 
     @PostConstruct

@@ -78,11 +78,13 @@
                     </h:form>
 
 
-                    <h:dataTable value="#{lopController.lopDetail.sinhVienList}" var="sv" >
+                    <h:dataTable value="#{sinhVienController.getSinhVienFromLop(lopController.selectedLop)}" var="sv" >
                         <h:column>
                             <f:facet name="header">ID</f:facet>
                             <h:form>
-                                <h:commandLink value="#{sv.id}" action="#{sinhVienController.goToEditPage(sv)}" />
+                                <h:commandLink value="#{sv.id}" action="#{sinhVienController.goToEditPage(sv)}">
+                                    <f:param name="cid" value="#{mainController.conversationId}" />
+                                </h:commandLink>
                             </h:form>
                         </h:column>
                         <h:column>
@@ -117,7 +119,9 @@
                     <h:column>
                         <f:facet name="header">ID</f:facet>
                         <h:form>
-                            <h:commandLink value="#{sv.id}" action="#{sinhVienController.goToEditPage(sv)}" />
+                            <h:commandLink value="#{sv.id}" action="#{sinhVienController.goToEditPage(sv)}" >
+                                <f:param name="cid" value="#{mainController.conversationId}" />
+                            </h:commandLink>
                         </h:form>
                     </h:column>
                     <h:column>

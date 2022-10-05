@@ -41,5 +41,13 @@ public class MainController implements Serializable {
             conversation.end();
         }
     }
+
+    public String getConversationId() {
+        if (!conversation.isTransient()) {
+            return conversation.getId();
+        } else {
+            return "";
+        }
+    }
 }
 

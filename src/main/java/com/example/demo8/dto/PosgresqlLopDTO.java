@@ -13,7 +13,7 @@ import java.util.List;
 public class PosgresqlLopDTO implements ClassDTO{
     @Override
     public Connection connect() {
-        return new PostgresqlSinhVienDTO().connect();
+        return PostgresqlConnect.connect();
     }
 
     @Override
@@ -66,10 +66,13 @@ public class PosgresqlLopDTO implements ClassDTO{
         try {
             Connection connection = connect();
             String query = "DELETE FROM lop WHERE class_id = ? ";
-
+            String query2 = "DELETE FROM sinhvien WHERE sinhvien.lop_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
+            PreparedStatement deleteSinhVienStatement = connection.prepareStatement(query2);
             statement.setInt(1, lop.getId());
+            deleteSinhVienStatement.setInt(1, lop.getId());
             statement.execute();
+            deleteSinhVienStatement.execute();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();

@@ -13,14 +13,7 @@ public class PostgresqlSinhVienDTO implements SinhVienDTO {
 
     @Override
     public Connection connect() {
-        Connection connection = null;
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-//            System.out.println("Connect to DB success!");
-        } catch (SQLException e) {
-            System.out.println("Error " + e.getMessage());
-        }
-        return connection;
+        return PostgresqlConnect.connect();
     }
 
     @Override
