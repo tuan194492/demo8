@@ -103,7 +103,7 @@
                     </h:dataTable>
                     <h:form>
                         <h:commandButton value="Back to class list" >
-                            <f:ajax event="click" listener="#{mainController.changePage('Lop')}" render="all" />
+                            <f:ajax event="click" listener="#{lopController.unSelectLop}" render="all" />
                         </h:commandButton>
                         <h:commandButton value="Them sinh vien" action="#{sinhVienController.createSinhVien(lopController.selectedLop)}" />
                     </h:form>

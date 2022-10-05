@@ -2,8 +2,8 @@ package com.example.demo8.controller;
 
 import com.example.demo8.model.PageType;
 
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.annotation.ManagedProperty;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -12,15 +12,7 @@ import java.io.Serializable;
 @SessionScoped
 public class MainController implements Serializable {
     @Inject
-    private LopController lopController;
-
-    public LopController getLopController() {
-        return lopController;
-    }
-
-    public void setLopController(LopController lopController) {
-        this.lopController = lopController;
-    }
+    private Conversation conversation;
 
     private PageType pageType;
 
@@ -41,8 +33,13 @@ public class MainController implements Serializable {
     }
 
     public void changePage(PageType pageType) {
+        if (this.pageType == PageType.Main && pageType != PageType.Main) {
+            conversation.begin();
+        }
         this.pageType = pageType;
-        lopController.selectLop(null);
+        if (this.pageType == PageType.Main) {
+            conversation.end();
+        }
     }
 }
 

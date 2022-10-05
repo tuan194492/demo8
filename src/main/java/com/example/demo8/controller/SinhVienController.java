@@ -5,6 +5,8 @@ import com.example.demo8.dto.SinhVienDTO;
 import com.example.demo8.model.Lop;
 import com.example.demo8.model.SinhVien;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -18,7 +20,7 @@ public class SinhVienController  implements Serializable {
     public SinhVienController() {
 
     }
-    SinhVienDTO sinhVienDTO = new PostgresqlSinhVienDTO();
+    private final SinhVienDTO sinhVienDTO = new PostgresqlSinhVienDTO();
     private List<SinhVien> sinhVienList;
     private SinhVien selectedSinhVien;
 
@@ -27,7 +29,7 @@ public class SinhVienController  implements Serializable {
     }
 
     public void selectSinhVien(int id) {
-        System.out.println("Hello world");
+//        System.out.println("Hello world");
         for (SinhVien sinhVien : sinhVienList) {
             if (sinhVien.getId() == id) {
                 selectedSinhVien = sinhVien;
@@ -42,7 +44,7 @@ public class SinhVienController  implements Serializable {
     }
 
     public List<SinhVien> getSinhVienList() {
-        System.out.println("Hello world from Tuan");
+//        System.out.println("Hello world from Tuan");
         sinhVienList = sinhVienDTO.selectAll();
         return sinhVienList;
     }
@@ -85,6 +87,16 @@ public class SinhVienController  implements Serializable {
     public void deleteSinhVien(SinhVien sinhVien) {
         System.out.println("Delete sinh vien");
         sinhVienDTO.deleteSinhVien(sinhVien);
+    }
+
+    @PostConstruct
+    public void init() {
+        System.out.println("Sinh Vien controller is created");
+    }
+
+    @PreDestroy
+    public void destroy() {
+        System.out.println("Sinh Vien controller destroyed");
     }
 
 }

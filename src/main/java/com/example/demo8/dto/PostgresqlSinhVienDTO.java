@@ -16,7 +16,7 @@ public class PostgresqlSinhVienDTO implements SinhVienDTO {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Connect to DB success!");
+//            System.out.println("Connect to DB success!");
         } catch (SQLException e) {
             System.out.println("Error " + e.getMessage());
         }
