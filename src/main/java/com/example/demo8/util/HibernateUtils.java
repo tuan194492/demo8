@@ -9,8 +9,8 @@ public class HibernateUtils {
     public static SessionFactory getSessionFactory() {
         try {
             Configuration configuration = new Configuration();
-
-            SessionFactoryBuilder sessionFactoryBuilder = new Standar
+            configuration.configure("hibernate.cfg.xml");
+            return configuration.buildSessionFactory();
 
         } catch (Exception e) {
             e.printStackTrace();
