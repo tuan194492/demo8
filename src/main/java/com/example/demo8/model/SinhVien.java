@@ -1,12 +1,22 @@
 package com.example.demo8.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
-public class SinhVien {
+@Entity(name = "sinhvien")
+public class SinhVien implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int id;
+
+    @Column(name = "name")
     private String name;
+    @Column(name = "birth")
     private Date birth;
 
+    @Column(name = "lop_id")
     private int classId;
 
     public int getClassId() {

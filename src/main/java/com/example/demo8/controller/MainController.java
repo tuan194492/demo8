@@ -6,6 +6,7 @@ import javax.enterprise.context.Conversation;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Qualifier;
 import java.io.Serializable;
 
 @Named(value = "mainController")
