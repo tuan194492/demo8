@@ -1,3 +1,7 @@
+import com.example.demo8.dao.StudentDAO;
+import com.example.demo8.model.Lop;
+import com.example.demo8.model.SinhVien;
+import com.example.demo8.util.HibernateUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Metamodel;
 import org.hibernate.query.Query;
@@ -5,9 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import javax.persistence.metamodel.EntityType;
-
-import java.util.Map;
+import java.util.List;
 
 public class Main {
     private static final SessionFactory ourSessionFactory;
@@ -28,6 +30,14 @@ public class Main {
     }
 
     public static void main(final String[] args) throws Exception {
-        System.out.println("Hello world");
+//        SinhVien sinhVien = getSession().get(SinhVien.class, 1);
+//        Session session = HibernateUtils.getSession();
+//        Lop lop = session.get(Lop.class, 2);
+//        System.out.println(lop.getLopTruong().getId());
+//        System.out.println("Hello world");
+//        session.close();
+        StudentDAO studentDAO = new StudentDAO();
+        List<SinhVien> list = studentDAO.getAllSinhVien();
+        System.out.println(list);
     }
 }

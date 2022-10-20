@@ -4,28 +4,22 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Entity(name = "sinhvien")
+@Entity
+@Table(name = "student")
 public class SinhVien implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "student_id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "student_name")
     private String name;
     @Column(name = "birth")
     private Date birth;
 
-    @Column(name = "lop_id")
-    private int classId;
-
-    public int getClassId() {
-        return classId;
-    }
-
-    public void setClassId(int classId) {
-        this.classId = classId;
-    }
+    @ManyToOne
+    @JoinColumn(name = "class_id")
+    private Lop lop;
 
     public SinhVien() {
 
@@ -53,6 +47,14 @@ public class SinhVien implements Serializable {
 
     public void setBirth(Date birth) {
         this.birth = birth;
+    }
+
+    public Lop getLop() {
+        return lop;
+    }
+
+    public void setLop(Lop lop) {
+        this.lop = lop;
     }
 }
 

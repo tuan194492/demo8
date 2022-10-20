@@ -31,7 +31,7 @@ public class PosgresqlLopDTO implements ClassDTO{
             while (resultSet.next()) {
                 Lop lop = new Lop();
                 lop.setId(resultSet.getInt("class_id"));
-                lop.setLopTruongId(resultSet.getInt("loptruong_id"));
+//                lop.setLopTruongId(resultSet.getInt("loptruong_id"));
                 lop.setName(resultSet.getString("name"));
                 lopList.add(lop);
             }
@@ -53,7 +53,7 @@ public class PosgresqlLopDTO implements ClassDTO{
                     "WHERE lop.class_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, lop.getName());
-            preparedStatement.setInt(2, lop.getLopTruongId());
+//            preparedStatement.setInt(2, lop.getLopTruongId());
             preparedStatement.setInt(3, lop.getId());
             preparedStatement.execute();
 
@@ -113,7 +113,7 @@ public class PosgresqlLopDTO implements ClassDTO{
                 sinhVien.setId(resultSet.getInt("user_id"));
                 sinhVien.setName(resultSet.getString("name"));
                 sinhVien.setBirth(resultSet.getDate("birth"));
-                sinhVien.setClassId(classID);
+//                sinhVien.setClassId(classID);
                 sinhVienList.add(sinhVien);
             }
             connection.close();

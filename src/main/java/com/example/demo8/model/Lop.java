@@ -1,12 +1,28 @@
 package com.example.demo8.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
-public class Lop {
+@Entity
+@Table(name = "class")
+public class Lop implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "class_id")
     private int id;
-    private String name;
-    private int lopTruongId;
 
+    @Column(name = "name")
+    private String name;
+
+//    @Column(name = "loptruong_id")
+//    private Integer lopTruongId;
+
+    @OneToOne
+    @JoinColumn(name = "loptruong_id", referencedColumnName = "student_id", nullable = true)
+    private SinhVien lopTruong;
+
+    @OneToMany(mappedBy = "lop")
     private List<SinhVien> sinhVienList;
 
     public List<SinhVien> getSinhVienList() {
@@ -33,11 +49,19 @@ public class Lop {
         this.name = name;
     }
 
-    public int getLopTruongId() {
-        return lopTruongId;
+//    public Integer getLopTruongId() {
+//        return lopTruongId;
+//    }
+//
+//    public void setLopTruongId(Integer lopTruongId) {
+//        this.lopTruongId = lopTruongId;
+//    }
+
+    public void setLopTruong(SinhVien lopTruong) {
+        this.lopTruong = lopTruong;
     }
 
-    public void setLopTruongId(int lopTruongId) {
-        this.lopTruongId = lopTruongId;
+    public SinhVien getLopTruong() {
+        return lopTruong;
     }
 }

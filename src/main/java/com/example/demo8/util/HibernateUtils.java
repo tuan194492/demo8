@@ -6,15 +6,24 @@ import org.hibernate.boot.SessionFactoryBuilder;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtils {
-    public static SessionFactory getSessionFactory() {
+    private static SessionFactory sessionFactory;
+
+    static {
         try {
             Configuration configuration = new Configuration();
             configuration.configure("hibernate.cfg.xml");
-            return configuration.buildSessionFactory();
+            sessionFactory = configuration.buildSessionFactory();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+
+    public static Session getSession() {
+        return sessionFactory.openSession();
     }
 }

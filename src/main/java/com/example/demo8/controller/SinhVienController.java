@@ -1,5 +1,6 @@
 package com.example.demo8.controller;
 
+import com.example.demo8.dao.StudentDAO;
 import com.example.demo8.dto.ClassDTO;
 import com.example.demo8.dto.PosgresqlLopDTO;
 import com.example.demo8.dto.PostgresqlSinhVienDTO;
@@ -11,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import java.io.Serializable;
@@ -23,6 +25,8 @@ public class SinhVienController  implements Serializable {
         sinhVienDTO = new PostgresqlSinhVienDTO();
     }
     private SinhVienDTO sinhVienDTO;
+    @Inject
+    private StudentDAO studentDAO;
     private List<SinhVien> sinhVienList;
     private SinhVien selectedSinhVien;
 
@@ -47,7 +51,13 @@ public class SinhVienController  implements Serializable {
 
     public List<SinhVien> getSinhVienList() {
 //        System.out.println("Hello world from Tuan");
+/*
+        JDBC version
         sinhVienList = sinhVienDTO.selectAll();
+ */
+        /*
+            Hibernate version
+         */
         return sinhVienList;
     }
 
@@ -82,7 +92,7 @@ public class SinhVienController  implements Serializable {
     public String createSinhVien(Lop lop) {
         selectedSinhVien = new SinhVien();
         selectedSinhVien.setId(-1);
-        selectedSinhVien.setClassId(lop.getId());
+//        selectedSinhVien.setClassId(lop.getId());
         return "edit";
     }
 

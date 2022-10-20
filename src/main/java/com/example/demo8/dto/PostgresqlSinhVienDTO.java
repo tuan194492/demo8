@@ -28,7 +28,7 @@ public class PostgresqlSinhVienDTO implements SinhVienDTO {
             Date sqlDate = new Date(sinhVien.getBirth().getTime());
             statement.setDate(2, sqlDate);
 
-            statement.setInt(3, sinhVien.getClassId());
+//            statement.setInt(3, sinhVien.getClassId());
 
             System.out.println("Current query is " + statement + " " + sinhVien.getBirth().toString());
             statement.execute();
@@ -55,7 +55,7 @@ public class PostgresqlSinhVienDTO implements SinhVienDTO {
                 sinhVien.setId(resultSet.getInt("user_id"));
                 sinhVien.setName(resultSet.getString("name"));
                 sinhVien.setBirth(resultSet.getDate("birth"));
-                sinhVien.setClassId(resultSet.getInt("lop_id"));
+//                sinhVien.setClassId(resultSet.getInt("lop_id"));
                 sinhVienList.add(sinhVien);
             }
 
@@ -87,7 +87,7 @@ public class PostgresqlSinhVienDTO implements SinhVienDTO {
             Date sqlDate = new Date(sinhVien.getBirth().getTime());
             statement.setDate(2, sqlDate);
 
-            statement.setInt(3, sinhVien.getClassId());
+//            statement.setInt(3, sinhVien.getClassId());
 
             System.out.println("Current query is " + statement);
             statement.execute();
